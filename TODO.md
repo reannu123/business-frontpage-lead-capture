@@ -6,6 +6,7 @@ Last updated: 2026-06-26
 
 - Name: Business Frontpage + Lead Capture
 - Path: `/home/reannu123/Projects/portfolio/business-frontpage-lead-capture`
+- GitHub: `https://github.com/reannu123/business-frontpage-lead-capture`
 - Status: active
 - Stage: showcase new build
 - Portfolio role: First dummy-client showcase for the easiest buyer path: a
@@ -117,3 +118,5 @@ case-study note. The selected public launch path is a Docker-backed demo at
 - 2026-06-26: Generated home-server launch credentials in ignored local file
   `.env.home-server.local` and documented Cloudflare Tunnel / Nginx Proxy
   Manager deployment notes.
+- 2026-06-26: Published the public GitHub repository at
+  `https://github.com/reannu123/business-frontpage-lead-capture`.
