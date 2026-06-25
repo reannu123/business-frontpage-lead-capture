@@ -1,0 +1,17 @@
+node_modules
+.next
+coverage
+test-results
+playwright-report
+.git
+.env
+.env.*
+!.env.example
+prisma/dev.db
+prisma/dev.db-journal
+prisma/ci.db
+prisma/ci.db-journal
+npm-debug.log*
+Dockerfile
+docker-compose*.yml
+compose*.yaml

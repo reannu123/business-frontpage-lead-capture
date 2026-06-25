@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Lead {
+  id                     String        @id @default(cuid())
+  fullName               String
+  email                  String?
+  phone                  String?
+  requestedService       String
+  preferredContactMethod String
+  message                String
+  status                 String        @default("NEW")
+  source                 String        @default("website")
+  ipHash                 String?
+  userAgent              String?
+  createdAt              DateTime      @default(now())
+  updatedAt              DateTime      @updatedAt
+  outboxMessages         EmailOutbox[]
+
+  @@index([status, createdAt])
+  @@index([createdAt])
+}
+
+model EmailOutbox {
+  id           String    @id @default(cuid())
+  leadId       String?
+  to           String
+  subject      String
+  preview      String
+  body         String
+  deliveryMode String    @default("demo")
+  status       String    @default("QUEUED")
+  error        String?
+  createdAt    DateTime  @default(now())
+  sentAt       DateTime?
+  lead         Lead?     @relation(fields: [leadId], references: [id], onDelete: SetNull)
+
+  @@index([status, createdAt])
+  @@index([leadId])
+}

@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches: ["main", "master"]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+
+    env:
+      DATABASE_URL: file:./ci.db
+      ADMIN_EMAIL: admin@brightnest.example
+      ADMIN_PASSWORD: local-demo-admin
+      ADMIN_PASSWORD_HASH: scrypt:Y6gpgwisl6sK06LFmrxSng:U5XrmnS-77dXvTyDFnE3mASdL5f4Q998EkXDd4dhZ1vLw26ewX7WB1TJ0zz_X3-12vX0lEW45GdkGeoeWWplSw
+      SESSION_SECRET: change-this-ci-demo-session-secret-32-plus-characters
+      LEAD_NOTIFICATION_EMAIL: owner@brightnest.example
+      EMAIL_DELIVERY_MODE: demo
+      NEXT_PUBLIC_SITE_URL: http://localhost:3000
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Generate Prisma client
+        run: npm run db:generate
+
+      - name: Prepare database
+        run: npm run db:push && npm run db:seed
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Unit tests
+        run: npm run test
+
+      - name: Build
+        run: npm run build
+
+      - name: Validate Docker Compose config
+        run: |
+          docker compose config --quiet
+          docker compose -f compose.prod.yaml config --quiet
