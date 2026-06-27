@@ -71,11 +71,12 @@ Use one primary category label on executable tasks:
 
 - [ ] [DevOps] Point `frontpage.demo.reannu.dev` to the chosen Docker host or
       reverse proxy.
-- [ ] [DevOps] Copy the generated `.env.home-server.local` values and
-      `compose.deploy.yaml` to the home-server deployment folder.
-- [ ] [DevOps] Pull the GHCR image with `compose.deploy.yaml`, run
-      health/browser smoke checks, and add the live URL to the case study or
-      portfolio entry.
+- [x] [DevOps] Create the home-server deployment folder with `.env`,
+      `.admin-login.txt`, and `compose.deploy.yaml`.
+- [x] [DevOps] Pull the GHCR image with `compose.deploy.yaml` and pass the VM
+      local health check on `http://localhost:3021/api/health`.
+- [ ] [DevOps] Run public health/browser smoke checks and add the live URL to
+      the case study or portfolio entry.
 
 ## Next
 
@@ -141,3 +142,8 @@ Use one primary category label on executable tasks:
 - 2026-06-27: Added GHCR image publishing, pull-based `compose.deploy.yaml`,
   and a deployment runbook so the home server can deploy without cloning the
   app source.
+- 2026-06-27 VM deploy evidence: `pm-docker` created
+  `~/deployments/business-frontpage-lead-capture`, pulled
+  `ghcr.io/reannu123/business-frontpage-lead-capture:main`, started
+  `business-frontpage-lead-capture-app-1`, and passed
+  `curl -fsS http://localhost:3021/api/health`.
