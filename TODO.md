@@ -150,6 +150,9 @@ Use one primary category label on executable tasks:
 - 2026-06-27 public routing evidence: Raspberry Pi Nginx Proxy Manager routes
   `frontpage.reannu.dev` to `192.168.0.125:3021`, and public
   `https://frontpage.reannu.dev/api/health` plus the homepage return 200.
+- 2026-06-28 NPM API evidence: `frontpage.reannu.dev` is managed as Nginx
+  Proxy Manager proxy host `id=26`, forwarding HTTP to `192.168.0.125:3021`;
+  `nginx -t` passes and local Host-header health check returns 200.
 - 2026-06-27 public browser smoke evidence: Playwright submitted a unique
   public lead through `https://frontpage.reannu.dev`, logged into `/admin`, and
   confirmed the lead appeared in the admin inbox.
