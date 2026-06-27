@@ -7,7 +7,7 @@ services:
       - .env
     environment:
       DATABASE_URL: file:./data/dev.db
-      NEXT_PUBLIC_SITE_URL: "${NEXT_PUBLIC_SITE_URL:-https://frontpage.demo.reannu.dev}"
+      NEXT_PUBLIC_SITE_URL: "${NEXT_PUBLIC_SITE_URL:-https://frontpage.reannu.dev}"
       SEED_DEMO_DATA: "${SEED_DEMO_DATA:-false}"
     ports:
       - "${APP_PORT:-3021}:3000"

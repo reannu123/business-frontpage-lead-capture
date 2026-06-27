@@ -2,7 +2,7 @@
 
 The selected v1 launch path is a hybrid portfolio demo:
 
-- Public demo URL: `https://frontpage.demo.reannu.dev`
+- Public demo URL: `https://frontpage.reannu.dev`
 - Host: home server
 - Edge/DNS: Cloudflare
 - Ingress: Cloudflare Tunnel, with Nginx Proxy Manager optional as the local
@@ -20,7 +20,7 @@ still proving the self-hostable delivery workflow.
 
 ## Launch Steps
 
-1. Point `frontpage.demo.reannu.dev` through Cloudflare Tunnel to the home
+1. Point `frontpage.reannu.dev` through Cloudflare Tunnel to the home
    server.
 2. Copy `.env.production.example` or `.env.home-server.local` to `.env` on the
    home server.
@@ -42,7 +42,7 @@ still proving the self-hostable delivery workflow.
 6. Verify the health endpoint:
 
    ```bash
-   curl -fsS https://frontpage.demo.reannu.dev/api/health
+   curl -fsS https://frontpage.reannu.dev/api/health
    ```
 
 7. Submit a test lead and confirm it appears in `/admin`.

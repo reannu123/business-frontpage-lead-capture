@@ -28,7 +28,7 @@ Build a production-ready local v1 cleaning-service frontpage with lead capture,
 admin lead inbox, real single-account login, SMTP-capable notifications,
 Docker self-hosting support, documentation, screenshots, and a short portfolio
 case-study note. The selected public launch path is a Docker-backed demo at
-`https://frontpage.demo.reannu.dev` using SQLite and demo email mode for v1.
+`https://frontpage.reannu.dev` using SQLite and demo email mode for v1.
 
 ## Work Categories
 
@@ -65,17 +65,17 @@ Use one primary category label on executable tasks:
 - [x] Screenshots and a short case-study note explain the client problem,
       solution, tradeoffs, and result.
 - [x] Final deployment target is selected.
-- [ ] Demo is deployed and smoke-tested at the public URL.
+- [x] Demo is deployed and smoke-tested at the public URL.
 
 ## Now
 
-- [ ] [DevOps] Point `frontpage.demo.reannu.dev` to the chosen Docker host or
+- [x] [DevOps] Point `frontpage.reannu.dev` to the chosen Docker host or
       reverse proxy.
 - [x] [DevOps] Create the home-server deployment folder with `.env`,
       `.admin-login.txt`, and `compose.deploy.yaml`.
 - [x] [DevOps] Pull the GHCR image with `compose.deploy.yaml` and pass the VM
       local health check on `http://localhost:3021/api/health`.
-- [ ] [DevOps] Run public health/browser smoke checks and add the live URL to
+- [x] [DevOps] Run public form/admin browser smoke checks and add the live URL to
       the case study or portfolio entry.
 
 ## Next
@@ -131,7 +131,7 @@ Use one primary category label on executable tasks:
   `docker compose -f compose.prod.yaml config --quiet`, production image build,
   and disposable container `/api/health` smoke test passed locally.
 - 2026-06-25 decision: Selected a hybrid public launch path:
-  `https://frontpage.demo.reannu.dev`, Dockerized runtime, persisted SQLite,
+  `https://frontpage.reannu.dev`, Dockerized runtime, persisted SQLite,
   demo email mode, and SMTP/Postgres deferred until a real-provider or
   multi-instance requirement appears.
 - 2026-06-26: Generated home-server launch credentials in ignored local file
@@ -147,3 +147,9 @@ Use one primary category label on executable tasks:
   `ghcr.io/reannu123/business-frontpage-lead-capture:main`, started
   `business-frontpage-lead-capture-app-1`, and passed
   `curl -fsS http://localhost:3021/api/health`.
+- 2026-06-27 public routing evidence: Raspberry Pi Nginx Proxy Manager routes
+  `frontpage.reannu.dev` to `192.168.0.125:3021`, and public
+  `https://frontpage.reannu.dev/api/health` plus the homepage return 200.
+- 2026-06-27 public browser smoke evidence: Playwright submitted a unique
+  public lead through `https://frontpage.reannu.dev`, logged into `/admin`, and
+  confirmed the lead appeared in the admin inbox.

@@ -1,7 +1,7 @@
 # Self-Hosting With Docker
 
 The selected v1 launch path is a Docker-backed public demo at
-`https://frontpage.demo.reannu.dev` on the home server. Docker is useful here
+`https://frontpage.reannu.dev` on the home server. Docker is useful here
 because the demo should prove clone-and-run delivery and remain self-hostable
 on a home server, VPS, or Docker-capable host.
 
@@ -57,7 +57,7 @@ Postgres once multiple instances, managed backups, or serverless hosting matter.
 
 ## Deployment Notes
 
-- Set `NEXT_PUBLIC_SITE_URL` to `https://frontpage.demo.reannu.dev`.
+- Set `NEXT_PUBLIC_SITE_URL` to `https://frontpage.reannu.dev`.
 - Keep `EMAIL_DELIVERY_MODE=demo` for the first public dummy-client demo.
 - Set `EMAIL_DELIVERY_MODE=smtp` and provide SMTP credentials only when real
   email delivery is intentionally enabled.

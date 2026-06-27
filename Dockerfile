@@ -20,6 +20,8 @@ CMD ["npm", "run", "dev"]
 FROM deps AS builder
 ENV NODE_ENV=production
 ENV DATABASE_URL=file:./dev.db
+ARG NEXT_PUBLIC_SITE_URL=http://localhost:3000
+ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
 COPY . .
 RUN npm run build
 

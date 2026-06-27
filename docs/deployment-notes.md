@@ -1,7 +1,7 @@
 # Deployment Notes
 
 The selected v1 launch path is a hybrid portfolio demo: a public Docker-backed
-demo at `https://frontpage.demo.reannu.dev`, with self-hosting instructions kept
+demo at `https://frontpage.reannu.dev`, with self-hosting instructions kept
 as part of the client-delivery proof.
 
 ## Current Local Runtime
@@ -32,7 +32,7 @@ Current support:
 
 Selected defaults:
 
-- Public URL target: `https://frontpage.demo.reannu.dev`
+- Public URL target: `https://frontpage.reannu.dev`
 - Database: SQLite volume for the first public demo
 - Email mode: `demo`
 - TLS: handled by the chosen reverse proxy or public hosting edge
@@ -52,7 +52,8 @@ point of the showcase.
 - Move from SQLite to Postgres for hosted multi-user or multi-instance
   deployment.
 - Add shared rate limiting if running more than one app instance.
-- Set a real `NEXT_PUBLIC_SITE_URL`.
+- Set a real `NEXT_PUBLIC_SITE_URL`. For Docker images, this is also passed as
+  a build argument so Next.js metadata and sitemap output use the public URL.
 - Confirm privacy copy and data retention rules.
 - Add backup and reset instructions for the chosen database.
 - Re-run `npm audit --omit=dev` and upgrade Next when a stable release resolves
@@ -63,4 +64,4 @@ point of the showcase.
 Use the Docker-backed public demo path first. GitHub Actions publishes the
 production image to GHCR, and the home server pulls that image with
 `compose.deploy.yaml`. The next milestone is deployment and smoke verification
-at `https://frontpage.demo.reannu.dev`.
+at `https://frontpage.reannu.dev`.

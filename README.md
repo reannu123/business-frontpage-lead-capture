@@ -102,7 +102,7 @@ and production build.
 
 The selected v1 launch path is a hybrid portfolio demo:
 
-- Public demo URL target: `https://frontpage.demo.reannu.dev`
+- Public demo URL target: `https://frontpage.reannu.dev`
 - Host: home server behind Cloudflare Tunnel
 - Runtime: Dockerized Next.js standalone app behind TLS
 - Database: SQLite persisted in the Docker volume for the first public demo

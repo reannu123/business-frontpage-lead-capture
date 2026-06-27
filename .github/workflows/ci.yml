@@ -95,6 +95,8 @@ jobs:
         with:
           context: .
           target: production
+          build-args: |
+            NEXT_PUBLIC_SITE_URL=https://frontpage.reannu.dev
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}

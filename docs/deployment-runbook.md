@@ -1,7 +1,10 @@
 # Deployment Runbook
 
 This runbook is for the public demo at
-`https://frontpage.demo.reannu.dev`.
+`https://frontpage.reannu.dev`.
+
+The selected hostname is one level under `reannu.dev` so it fits the existing
+Cloudflare wildcard certificate and tunnel rule.
 
 ## Deployment Model
 
@@ -10,7 +13,7 @@ This runbook is for the public demo at
 - The home server keeps only deployment files and secrets, not the app source.
 - Docker Compose pulls the selected image tag and runs it with a persisted
   SQLite volume.
-- Cloudflare Tunnel routes `frontpage.demo.reannu.dev` to `localhost:3021`.
+- Cloudflare Tunnel routes `frontpage.reannu.dev` to `localhost:3021`.
 
 ## Image Tags
 
@@ -58,18 +61,18 @@ curl -fsS http://localhost:3021/api/health
 
 Then configure Cloudflare Tunnel:
 
-- Public hostname: `frontpage.demo.reannu.dev`
+- Public hostname: `frontpage.reannu.dev`
 - Service type: `HTTP`
 - Service URL: `localhost:3021`
 
 Run the public smoke check:
 
 ```bash
-curl -fsS https://frontpage.demo.reannu.dev/api/health
+curl -fsS https://frontpage.reannu.dev/api/health
 ```
 
 Submit one test lead through the public page and confirm it appears in
-`https://frontpage.demo.reannu.dev/admin`.
+`https://frontpage.reannu.dev/admin`.
 
 ## Update Deploy
 
@@ -80,7 +83,7 @@ cd ~/deployments/business-frontpage-lead-capture
 docker compose -f compose.deploy.yaml pull
 docker compose -f compose.deploy.yaml up -d
 docker compose -f compose.deploy.yaml ps
-curl -fsS https://frontpage.demo.reannu.dev/api/health
+curl -fsS https://frontpage.reannu.dev/api/health
 ```
 
 ## Rollback
@@ -96,7 +99,7 @@ Then redeploy:
 ```bash
 docker compose -f compose.deploy.yaml pull
 docker compose -f compose.deploy.yaml up -d
-curl -fsS https://frontpage.demo.reannu.dev/api/health
+curl -fsS https://frontpage.reannu.dev/api/health
 ```
 
 ## Logs

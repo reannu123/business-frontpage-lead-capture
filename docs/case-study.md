@@ -36,6 +36,8 @@ The app demonstrates a sellable local-business workflow: visitors can request a
 cleaning quote, and the business owner can review, contact, qualify, win, or
 lose each lead.
 
+Public demo: `https://frontpage.reannu.dev`
+
 ## Tradeoffs
 
 - A real client would need a chosen email provider and, if multiple users are

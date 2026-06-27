@@ -3,7 +3,7 @@
 Selected path:
 
 - Host: home server
-- Public hostname: `frontpage.demo.reannu.dev`
+- Public hostname: `frontpage.reannu.dev`
 - Edge/DNS: Cloudflare
 - Ingress: Cloudflare Tunnel, with Nginx Proxy Manager available if you want
   one dashboard for all local apps
@@ -60,11 +60,16 @@ In Cloudflare Zero Trust, add a public hostname:
 This is the simplest path for the first demo because Cloudflare handles the
 public hostname and TLS while the app stays bound to the home server.
 
+Note: `frontpage.reannu.dev` is intentionally one level under `reannu.dev` so
+it fits the existing Cloudflare wildcard certificate and tunnel rule. A nested
+hostname such as `frontpage.demo.reannu.dev` needs separate Cloudflare
+certificate coverage.
+
 ## 5. Optional Nginx Proxy Manager Path
 
 If you prefer all local apps to pass through Nginx Proxy Manager:
 
-1. In Nginx Proxy Manager, add a proxy host for `frontpage.demo.reannu.dev`.
+1. In Nginx Proxy Manager, add a proxy host for `frontpage.reannu.dev`.
 2. Forward to the home-server IP and port `3021`.
 3. In Cloudflare Tunnel, point the public hostname to Nginx Proxy Manager
    instead of directly to `localhost:3021`.
@@ -77,11 +82,11 @@ proxy rules. For this single demo, direct Tunnel-to-app is simpler.
 After the hostname is live:
 
 ```bash
-curl -fsS https://frontpage.demo.reannu.dev/api/health
+curl -fsS https://frontpage.reannu.dev/api/health
 ```
 
 Then submit one test lead on the public page and confirm it appears in
-`https://frontpage.demo.reannu.dev/admin`.
+`https://frontpage.reannu.dev/admin`.
 
 See `docs/deployment-runbook.md` for update deploys, rollback, logs, and data
 notes.
