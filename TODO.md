@@ -7,7 +7,7 @@ Last updated: 2026-06-27
 - Name: Business Frontpage + Lead Capture
 - Path: `/home/reannu123/Projects/portfolio/business-frontpage-lead-capture`
 - GitHub: `https://github.com/reannu123/business-frontpage-lead-capture`
-- Status: active
+- Status: complete
 - Stage: showcase new build
 - Portfolio role: First dummy-client showcase for the easiest buyer path: a
   local service business website with lead capture, deployment, documentation,
