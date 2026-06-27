@@ -26,6 +26,7 @@ Current support:
   target
 - `docker-compose.yml` for development
 - `compose.prod.yaml` for production-like self-hosting
+- `compose.deploy.yaml` for pull-based home-server deployment from GHCR
 - SQLite persisted in a named volume
 - `/api/health` health check
 
@@ -59,5 +60,7 @@ point of the showcase.
 
 ## Current Decision
 
-Use the Docker-backed public demo path first. The next milestone is deployment
-and smoke verification at `https://frontpage.demo.reannu.dev`.
+Use the Docker-backed public demo path first. GitHub Actions publishes the
+production image to GHCR, and the home server pulls that image with
+`compose.deploy.yaml`. The next milestone is deployment and smoke verification
+at `https://frontpage.demo.reannu.dev`.

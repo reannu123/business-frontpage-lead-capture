@@ -160,6 +160,7 @@ turning the app into a CRM.
 - [Deployment notes](docs/deployment-notes.md)
 - [Launch plan](docs/launch-plan.md)
 - [Home server deployment](docs/home-server-deployment.md)
+- [Deployment runbook](docs/deployment-runbook.md)
 - [Email setup](docs/email-setup.md)
 - [Admin authentication](docs/admin-auth.md)
 - [Self-hosting with Docker](docs/self-hosting.md)

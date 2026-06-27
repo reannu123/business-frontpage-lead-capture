@@ -7,23 +7,34 @@ Selected path:
 - Edge/DNS: Cloudflare
 - Ingress: Cloudflare Tunnel, with Nginx Proxy Manager available if you want
   one dashboard for all local apps
-- App runtime: Docker Compose production stack
+- App runtime: Docker Compose deploy stack pulling from GHCR
 - Host port: `3021`
 
-## 1. Publish The Code
+## 1. Publish The Image
 
-Clone or pull the GitHub repository on the home server, then enter the project
-folder:
+Push to `main` or `master` and let GitHub Actions publish the production image
+to GitHub Container Registry:
 
-```bash
-git clone git@github.com:reannu123/business-frontpage-lead-capture.git
-cd business-frontpage-lead-capture
-```
+- `ghcr.io/reannu123/business-frontpage-lead-capture:main`
+- `ghcr.io/reannu123/business-frontpage-lead-capture:<commit-sha>`
+
+The home server does not need the app source code for the selected deploy path.
+After the first publish, confirm the GHCR package is public or log in on the
+home server with a token that has `read:packages` access.
 
 ## 2. Add The Launch Environment
 
+Create a deployment folder on the home server, then add `.env` and
+`compose.deploy.yaml`:
+
+```bash
+mkdir -p ~/deployments/business-frontpage-lead-capture
+cd ~/deployments/business-frontpage-lead-capture
+```
+
 Copy the generated local env file from this workstation to the home server as
-`.env`, or recreate it from `.env.production.example`.
+`.env`, or recreate it from `.env.production.example`. Copy
+`compose.deploy.yaml` from the repository into this deployment folder.
 
 The app only needs the password hash at runtime. Keep the generated admin
 password somewhere private so you can log in at `/admin`.
@@ -31,8 +42,9 @@ password somewhere private so you can log in at `/admin`.
 ## 3. Start The App
 
 ```bash
-docker compose -f compose.prod.yaml up --build -d
-docker compose -f compose.prod.yaml ps
+docker compose -f compose.deploy.yaml pull
+docker compose -f compose.deploy.yaml up -d
+docker compose -f compose.deploy.yaml ps
 curl -fsS http://localhost:3021/api/health
 ```
 
@@ -70,3 +82,6 @@ curl -fsS https://frontpage.demo.reannu.dev/api/health
 
 Then submit one test lead on the public page and confirm it appears in
 `https://frontpage.demo.reannu.dev/admin`.
+
+See `docs/deployment-runbook.md` for update deploys, rollback, logs, and data
+notes.

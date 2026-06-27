@@ -7,12 +7,13 @@ The selected v1 launch path is a hybrid portfolio demo:
 - Edge/DNS: Cloudflare
 - Ingress: Cloudflare Tunnel, with Nginx Proxy Manager optional as the local
   proxy dashboard
-- Runtime: Dockerized Next.js standalone app behind TLS
+- Runtime: Dockerized Next.js standalone app behind TLS, with GitHub Actions
+  publishing the image to GHCR
 - Database: SQLite persisted in the Docker volume for the first public demo
 - Email mode: `demo`, so submissions are saved and visible without contacting a
   real email provider
-- Self-hosting proof: `Dockerfile`, `docker-compose.yml`, and
-  `compose.prod.yaml` stay part of the deliverable
+- Self-hosting proof: `Dockerfile`, `docker-compose.yml`, `compose.prod.yaml`,
+  and `compose.deploy.yaml` stay part of the deliverable
 
 This keeps the first dummy-client showcase easy to deploy and explain while
 still proving the self-hostable delivery workflow.
@@ -31,10 +32,11 @@ still proving the self-hostable delivery workflow.
 
 4. Set `ADMIN_PASSWORD_HASH`, `SESSION_SECRET`, and `NEXT_PUBLIC_SITE_URL` in
    `.env`.
-5. Start the production-like stack:
+5. Pull and start the deploy stack:
 
    ```bash
-   docker compose -f compose.prod.yaml up --build -d
+   docker compose -f compose.deploy.yaml pull
+   docker compose -f compose.deploy.yaml up -d
    ```
 
 6. Verify the health endpoint:
@@ -46,7 +48,8 @@ still proving the self-hostable delivery workflow.
 7. Submit a test lead and confirm it appears in `/admin`.
 
 See `docs/home-server-deployment.md` for the Cloudflare Tunnel and Nginx Proxy
-Manager details.
+Manager details. See `docs/deployment-runbook.md` for update deploys,
+rollback, logs, and data notes.
 
 ## Later Upgrade Gates
 

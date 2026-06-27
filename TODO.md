@@ -1,6 +1,6 @@
 # Business Frontpage + Lead Capture TODO
 
-Last updated: 2026-06-26
+Last updated: 2026-06-27
 
 ## Project
 
@@ -30,6 +30,22 @@ Docker self-hosting support, documentation, screenshots, and a short portfolio
 case-study note. The selected public launch path is a Docker-backed demo at
 `https://frontpage.demo.reannu.dev` using SQLite and demo email mode for v1.
 
+## Work Categories
+
+Use one primary category label on executable tasks:
+
+- `[Dev]`: application code, features, data models, frontend/backend behavior.
+- `[DevOps]`: deployment, Docker, CI/CD, DNS, reverse proxy, hosting,
+  environment/secrets, monitoring, backups, and production smoke checks.
+- `[Docs]`: README, setup guides, deployment notes, screenshots, case studies,
+  and handoff material.
+- `[QA]`: tests, lint/typecheck, bug reproduction, verification, and regression
+  checks.
+- `[Design/UX]`: visual polish, layout, interaction flow, accessibility, and
+  user-facing content structure.
+- `[Business/Ops]`: offers, outreach, portfolio positioning, client workflow,
+  retainers, and admin/process work.
+
 ## Definition Of Done
 
 - [x] Public business frontpage presents the dummy cleaning service clearly.
@@ -53,29 +69,31 @@ case-study note. The selected public launch path is a Docker-backed demo at
 
 ## Now
 
-- [ ] Point `frontpage.demo.reannu.dev` to the chosen Docker host or reverse
-      proxy.
-- [ ] Copy the generated `.env.home-server.local` values to `.env` on the home
-      server.
-- [ ] Deploy with `compose.prod.yaml`, run health/browser smoke checks, and add
-      the live URL to the case study or portfolio entry.
+- [ ] [DevOps] Point `frontpage.demo.reannu.dev` to the chosen Docker host or
+      reverse proxy.
+- [ ] [DevOps] Copy the generated `.env.home-server.local` values and
+      `compose.deploy.yaml` to the home-server deployment folder.
+- [ ] [DevOps] Pull the GHCR image with `compose.deploy.yaml`, run
+      health/browser smoke checks, and add the live URL to the case study or
+      portfolio entry.
 
 ## Next
 
-- [ ] Configure real SMTP credentials and domain authentication if this demo is
-      upgraded from dummy-client mode to real lead email delivery.
-- [ ] Re-run `npm audit --omit=dev` and upgrade Next when a stable release
-      resolves its bundled PostCSS advisory.
+- [ ] [DevOps] Configure real SMTP credentials and domain authentication if
+      this demo is upgraded from dummy-client mode to real lead email delivery.
+- [ ] [Dev] Re-run `npm audit --omit=dev` and upgrade Next when a stable
+      release resolves its bundled PostCSS advisory.
 
 ## Later
 
-- [ ] Add analytics for visits, conversion rate, and lead source.
-- [ ] Add basic CMS/editable content sections.
-- [ ] Add multi-user admin auth only if this becomes more than a single-owner
-      lead inbox.
-- [ ] Add appointment booking as the next separate showcase instead of
-      expanding this v1.
-- [ ] Extract reusable frontpage sections only after this dummy client ships.
+- [ ] [Dev] Add analytics for visits, conversion rate, and lead source.
+- [ ] [Dev] Add basic CMS/editable content sections.
+- [ ] [Dev] Add multi-user admin auth only if this becomes more than a
+      single-owner lead inbox.
+- [ ] [Business/Ops] Add appointment booking as the next separate showcase
+      instead of expanding this v1.
+- [ ] [Dev] Extract reusable frontpage sections only after this dummy client
+      ships.
 
 ## Blocked
 
@@ -120,3 +138,6 @@ case-study note. The selected public launch path is a Docker-backed demo at
   Manager deployment notes.
 - 2026-06-26: Published the public GitHub repository at
   `https://github.com/reannu123/business-frontpage-lead-capture`.
+- 2026-06-27: Added GHCR image publishing, pull-based `compose.deploy.yaml`,
+  and a deployment runbook so the home server can deploy without cloning the
+  app source.
