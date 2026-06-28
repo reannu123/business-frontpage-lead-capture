@@ -11,9 +11,13 @@ Cloudflare wildcard certificate and tunnel rule.
 - GitHub Actions verifies the app, builds the production Docker image, and
   publishes it to GitHub Container Registry.
 - The home server keeps only deployment files and secrets, not the app source.
+- Compose files live under `/docker/compose`.
+- Persistent app data lives under `/docker/appdata`.
+- Backups live under `/docker/backups`.
 - Docker Compose pulls the selected image tag and runs it with a persisted
-  SQLite volume.
-- Cloudflare Tunnel routes `frontpage.reannu.dev` to `localhost:3021`.
+  SQLite bind mount.
+- Cloudflare Tunnel routes `frontpage.reannu.dev` to Nginx Proxy Manager on the
+  Raspberry Pi, which forwards to `pm-docker` at `192.168.0.125:3021`.
 
 ## Image Tags
 
@@ -38,8 +42,10 @@ docker login ghcr.io
 Create a deployment directory:
 
 ```bash
-mkdir -p ~/deployments/business-frontpage-lead-capture
-cd ~/deployments/business-frontpage-lead-capture
+mkdir -p /docker/compose/business-frontpage-lead-capture
+mkdir -p /docker/appdata/business-frontpage-lead-capture/sqlite
+mkdir -p /docker/backups/business-frontpage-lead-capture
+cd /docker/compose/business-frontpage-lead-capture
 ```
 
 Add these files:
@@ -63,7 +69,7 @@ Then configure Cloudflare Tunnel:
 
 - Public hostname: `frontpage.reannu.dev`
 - Service type: `HTTP`
-- Service URL: `localhost:3021`
+- Service URL: Nginx Proxy Manager on the Raspberry Pi
 
 Run the public smoke check:
 
@@ -79,7 +85,7 @@ Submit one test lead through the public page and confirm it appears in
 After a new image is published:
 
 ```bash
-cd ~/deployments/business-frontpage-lead-capture
+cd /docker/compose/business-frontpage-lead-capture
 docker compose -f compose.deploy.yaml pull
 docker compose -f compose.deploy.yaml up -d
 docker compose -f compose.deploy.yaml ps
@@ -110,6 +116,17 @@ docker compose -f compose.deploy.yaml logs -f --tail=100 app
 
 ## Data Notes
 
-SQLite is persisted in the Compose volume named `sqlite_data`. Back up or
-snapshot this volume before destructive resets once the public demo has real
-test leads you care about keeping.
+SQLite is persisted at:
+
+```bash
+/docker/appdata/business-frontpage-lead-capture/sqlite
+```
+
+Backups for this app belong in:
+
+```bash
+/docker/backups/business-frontpage-lead-capture
+```
+
+Back up or snapshot the SQLite appdata directory before destructive resets once
+the public demo has real test leads you care about keeping.

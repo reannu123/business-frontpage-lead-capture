@@ -24,12 +24,14 @@ home server with a token that has `read:packages` access.
 
 ## 2. Add The Launch Environment
 
-Create a deployment folder on the home server, then add `.env` and
-`compose.deploy.yaml`:
+Create the deployment, appdata, and backup folders on the home server, then add
+`.env` and `compose.deploy.yaml`:
 
 ```bash
-mkdir -p ~/deployments/business-frontpage-lead-capture
-cd ~/deployments/business-frontpage-lead-capture
+mkdir -p /docker/compose/business-frontpage-lead-capture
+mkdir -p /docker/appdata/business-frontpage-lead-capture/sqlite
+mkdir -p /docker/backups/business-frontpage-lead-capture
+cd /docker/compose/business-frontpage-lead-capture
 ```
 
 Copy the generated local env file from this workstation to the home server as
@@ -38,6 +40,12 @@ Copy the generated local env file from this workstation to the home server as
 
 The app only needs the password hash at runtime. Keep the generated admin
 password somewhere private so you can log in at `/admin`.
+
+SQLite is bind-mounted from:
+
+```bash
+/docker/appdata/business-frontpage-lead-capture/sqlite
+```
 
 ## 3. Start The App
 
@@ -52,10 +60,11 @@ curl -fsS http://localhost:3021/api/health
 
 In Cloudflare Zero Trust, add a public hostname:
 
-- Subdomain: `frontpage.demo`
+- Subdomain: `frontpage`
 - Domain: `reannu.dev`
 - Service type: `HTTP`
-- Service URL: `localhost:3021`
+- Service URL: the Nginx Proxy Manager origin or Docker host, depending on the
+  selected ingress path
 
 This is the simplest path for the first demo because Cloudflare handles the
 public hostname and TLS while the app stays bound to the home server.

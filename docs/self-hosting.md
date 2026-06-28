@@ -46,10 +46,11 @@ SEED_DEMO_DATA=true docker compose -f compose.prod.yaml up --build
 
 ## Persistent Data
 
-SQLite is stored in the `sqlite_data` named volume at:
+Development Compose stores SQLite data in a named volume. The home-server
+deployment stores SQLite data in the `/docker` appdata layout:
 
 ```text
-/app/prisma/data/dev.db
+/docker/appdata/business-frontpage-lead-capture/sqlite
 ```
 
 SQLite is the selected database for the first public dummy-client demo. Prefer
@@ -63,4 +64,4 @@ Postgres once multiple instances, managed backups, or serverless hosting matter.
   email delivery is intentionally enabled.
 - Replace demo admin credentials.
 - Put the app behind TLS before collecting real leads.
-- Back up the SQLite volume or move to Postgres.
+- Back up the SQLite appdata directory or move to Postgres.

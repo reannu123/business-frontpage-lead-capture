@@ -153,6 +153,11 @@ Use one primary category label on executable tasks:
 - 2026-06-28 NPM API evidence: `frontpage.reannu.dev` is managed as Nginx
   Proxy Manager proxy host `id=26`, forwarding HTTP to `192.168.0.125:3021`;
   `nginx -t` passes and local Host-header health check returns 200.
+- 2026-06-28 VM layout migration evidence: deployment files moved to
+  `/docker/compose/business-frontpage-lead-capture`, SQLite data moved from the
+  old Docker named volume to
+  `/docker/appdata/business-frontpage-lead-capture/sqlite`, and a pre-migration
+  backup was written to `/docker/backups/business-frontpage-lead-capture`.
 - 2026-06-27 public browser smoke evidence: Playwright submitted a unique
   public lead through `https://frontpage.reannu.dev`, logged into `/admin`, and
   confirmed the lead appeared in the admin inbox.
